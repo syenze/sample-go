@@ -28,4 +28,6 @@ deployment:
       - go get github.com/mitchellh/gox
       - go get github.com/tcnksm/ghr
       - gox -ldflags "-X main.BuildVersion $BUILD_VERSION -X main.BuildDate $BUILD_DATE" -output "dist/${CIRCLE_PROJECT_REPONAME}_{{.OS}}_{{.Arch}}"
+      - echo "${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME}"
+      - echo "`git describe --tags`"
       - ghr -t $GITHUB_TOKEN -u $CIRCLE_PROJECT_USERNAME -r $CIRCLE_PROJECT_REPONAME --replace `git describe --all --tags` dist/
